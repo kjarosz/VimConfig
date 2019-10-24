@@ -1,7 +1,7 @@
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'
+Plug 'ycm-core/YouCompleteMe'
 
 call plug#end()
 
