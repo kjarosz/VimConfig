@@ -1,3 +1,5 @@
+:set encoding=utf-8
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'
@@ -11,6 +13,7 @@ call plug#end()
 :set expandtab
 :set autoindent
 :set nu
+:set ruler
 :syntax on
 
 :colors darkblue
@@ -26,3 +29,5 @@ call plug#end()
 
 :nnoremap <leader>rs :source ~/.vimrc<CR>
 :nnoremap <leader>es :vs ~/.vimrc<CR>
+:nnoremap <leader>d :NERDTree<CR>
+:nnoremap <leader>f :NERDTreeFind 
