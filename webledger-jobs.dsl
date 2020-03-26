@@ -1,4 +1,4 @@
-pipelineJob('WebLedgerBackend') {
+job("WebLedgerBackend") {
   definition {
     cpsScm {
       scm {
@@ -10,7 +10,7 @@ pipelineJob('WebLedgerBackend') {
           }
         }
       }
-      scriptPath('jenkins.dsl')
+      scriptPath("jenkins.dsl")
     }
   }
 }
