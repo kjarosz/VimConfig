@@ -1,11 +1,16 @@
-job('DSL-Tutorial-1-Test') {
-    scm {
-        git('git://github.com/quidryan/aws-sdk-test.git')
+pipelineJob('WebLedgerBackend') {
+  definition {
+    cpsScm {
+      scm {
+        git {
+          remote {
+            name('master')
+            url('https://github.com/kjarosz/WebLedgerBackend.git')
+            credentials("
+          }
+        }
+      }
+      scriptPath('jenkins.dsl')
     }
-    triggers {
-        scm('H/15 * * * *')
-    }
-    steps {
-        maven('-e clean test')
-    }
+  }
 }
