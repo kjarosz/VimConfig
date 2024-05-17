@@ -9,8 +9,11 @@ local function set_ft_option(ft, option, value)
   })
 end
 
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = "Highlight when yanking text",
+  desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
@@ -18,7 +21,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 vim.opt.nu = true
-vim.opt.relativenumber = false
 
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
@@ -28,7 +30,7 @@ vim.opt.softtabstop = 2
 vim.opt.smartindent = true
 
 vim.opt.wrap = false
-set_ft_option({ "markdown" }, "wrap", true)
+set_ft_option({"markdown"}, "wrap", true)
 
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -47,4 +49,5 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = "100"
+vim.opt.colorcolumn = "120"
+

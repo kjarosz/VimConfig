@@ -15,34 +15,41 @@ return require('packer').startup(function(use)
 
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use('theprimeagen/harpoon')
-	use('mbbill/undotree')
-	use('tpope/vim-fugitive')
+  use('mbbill/undotree')
+  use('tpope/vim-fugitive')
   use('tpope/vim-surround')
   use('tpope/vim-sleuth')
   use {"ellisonleao/glow.nvim", config = function() require("glow").setup() end}
-  use('lewis6991/gitsigns.nvim')
+
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+
+    end
+  }
+
+
+  --use({ 'rose-pine/neovim', as = 'rose-pine', config = function() vim.cmd("colorscheme rose-pine") end})
+  use({ 'danilo-augusto/vim-afterglow', as = 'afterglow', config = function() vim.cmd("colorscheme afterglow") end})
+
   use('preservim/nerdtree')
-  use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
+  use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
-  use({ 'rose-pine/neovim', as = 'rose-pine', config = function() vim.cmd("colorscheme rose-pine") end })
+  use {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v3.x',
+    requires = {
+      --- Uncomment these if you want to manage LSP servers from neovim
+      {'williamboman/mason.nvim'},
+      {'williamboman/mason-lspconfig.nvim'},
 
-	use {
-		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v3.x',
-		requires = {
-			--- Uncomment these if you want to manage LSP servers from neovim
-			{'williamboman/mason.nvim'},
-			{'williamboman/mason-lspconfig.nvim'},
-
-			-- LSP Support
-			{'neovim/nvim-lspconfig'},
-			-- Autocompletion
-			{'hrsh7th/nvim-cmp'},
-			{'hrsh7th/cmp-nvim-lsp'},
-			{'L3MON4D3/LuaSnip'},
-		}
-	}
-
-  use 'vim-test/vim-test'
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},
+      {'hrsh7th/cmp-nvim-lsp'},
+      {'L3MON4D3/LuaSnip'},
+    }
+  }
 end)
 
