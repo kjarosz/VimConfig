@@ -30,7 +30,8 @@ return require('packer').startup(function(use)
 
 
   --use({ 'rose-pine/neovim', as = 'rose-pine', config = function() vim.cmd("colorscheme rose-pine") end})
-  use({ 'danilo-augusto/vim-afterglow', as = 'afterglow', config = function() vim.cmd("colorscheme afterglow") end})
+  use({ 'danilo-augusto/vim-afterglow', as = 'afterglow' })
+  use({ 'catppuccin/nvim', as = 'catppuccin' })
 
   use('preservim/nerdtree')
   use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
