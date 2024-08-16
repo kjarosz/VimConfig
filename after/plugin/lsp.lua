@@ -10,7 +10,6 @@ lsp_zero.on_attach(function(client, bufnr)
     vim.keymap.set(mode, keys, action, opts)
   end
 
-  print("LSP Zero attached")
   map("n", "gd", function() vim.lsp.buf.definition() end, "[G]o to [D]efinition")
   map("n", "K", function() vim.lsp.buf.hover() end, "Open hover menu")
   map("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, "[V]iew [W]orkspace [S]ymbol")

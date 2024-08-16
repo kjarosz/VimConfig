@@ -33,7 +33,6 @@ local function map(mode, keys, action, desc)
   vim.keymap.set(mode, keys, action, opts)
 end
 
-print("LSP Zero attached")
 map("n", "gd", function() vim.lsp.buf.definition() end, "[G]o to [D]efinition")
 map("n", "go", function() vim.lsp.buf.type_definition() end, "Show type definition")
 map("n", "K", function() vim.lsp.buf.hover() end, "Open hover menu")
