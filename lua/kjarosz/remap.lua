@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", ":NERDTree<CR>", { desc = "[P]roject tree [V]iew" })
+vim.keymap.set("n", "<leader>pv", ":NERDTreeToggle<CR>", { desc = "[P]roject tree [V]iew" })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move select text down" })
 vim.keymap.set("v", "K", ":m '>-2<CR>gv=gv", { desc = "Move select text up" })
