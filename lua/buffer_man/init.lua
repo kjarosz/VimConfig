@@ -90,6 +90,31 @@ function M.toggle_buffers_menu()
       end
     end
   })
+  --vim.api.nvim_buf_set_keymap(Buffer_ID, "v", "d", "", {
+  --  callback = function()
+  --    vim.cmd("<C-u>")
+  --    local vstart = vim.fn.getpos("'<")
+  --    local vend = vim.fn.getpos("'>")
+
+  --    M._log.debug(vstart)
+  --    M._log.debug(vend)
+
+  --    M._log.debug(string.format("Deleting buffers in range %i to %i", vstart, vend))
+  --    while vstart <= vend do
+  --      if vstart == active_idx then
+  --        M._log.debug(string.format("Skipping over active index %i", vstart))
+  --        vstart = vstart + 1
+  --      else 
+  --        M._log.debug(string.format("Deleting buffer at index %i", vstart))
+  --        vim.api.nvim_buf_delete(buffers[vstart], {})
+  --        vim.api.nvim_buf_set_lines(Buffer_id, vstart, vstart + 1, true, {})
+  --        table.remove(buffers, vstart)
+  --        vend = vend - 1
+  --      end
+  --      M._log.debug(string.format("Remaining range %i to %i, buffer count %i", vstart, vend, #buffers))
+  --    end
+  --  end
+  --})
 end
 
 function M.setup(opts)
