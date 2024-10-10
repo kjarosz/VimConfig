@@ -38,7 +38,7 @@ function M.toggle_buffers_menu()
 
   local buffers = get_listed_buffers()
   local content = {}
-  local active_idx = 1
+  local active_idx = 0
   for idx = 1, #buffers do
     local buffer_name = vim.fn.bufname(buffers[idx])
     if buffers[idx] == CurrentBuffer_ID then
@@ -47,6 +47,10 @@ function M.toggle_buffers_menu()
     else
       table.insert(content, string.format(" %i - %s", buffers[idx], buffer_name)) 
     end
+  end
+  if active_idx == 0 then
+    print("No buffers available to show")
+    return
   end
   M._log.debug(vim.inspect(content))
 
@@ -71,8 +75,22 @@ function M.toggle_buffers_menu()
       close_menu()
     end
   })
+  vim.api.nvim_buf_set_keymap(Buffer_ID, "n", "dd", "", {
+    callback = function() 
+      local cursor_position = vim.api.nvim_win_get_cursor(Window_ID)
+      M._log.debug(string.format("Selected line %i", cursor_position[1]))
+      if cursor_position[1] ~= active_idx then
+        local buffer_number = buffers[cursor_position[1]]
+        M._log.debug(string.format("Deleting buffer %i", buffer_number, ParentWindow_ID))
+        vim.api.nvim_buf_delete(buffer_number, {})
+        table.remove(buffers, cursor_position[1])
+        vim.api.nvim_buf_set_lines(Buffer_ID, cursor_position[1], cursor_position[1] + 1, true, {})
+      else
+        print("Can't delete active buffer. The world will explode")
+      end
+    end
+  })
 end
-
 
 function M.setup(opts)
   M._log = require("plenary.log").new({
