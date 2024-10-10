@@ -28,26 +28,36 @@ local function close_menu()
 end
  
 function M.toggle_buffers_menu()
-  if Window_ID ~= nil then
+  if Window_ID ~= nil and vim.api.nvim_win_is_valid(Window_ID) then
     M._log.debug("Buffer popup exists. Closing.")
     close_menu()
   end
 
+  ParentWindow_ID = vim.fn.win_getid()
+  CurrentBuffer_ID = vim.api.nvim_win_get_buf(ParentWindow_ID)
+
   local buffers = get_listed_buffers()
   local content = {}
+  local active_idx = 1
   for idx = 1, #buffers do
     local buffer_name = vim.fn.bufname(buffers[idx])
-    table.insert(content, string.format("%i - %s", buffers[idx], buffer_name)) 
+    if buffers[idx] == CurrentBuffer_ID then
+      active_idx = idx
+      table.insert(content, string.format("a%i - %s", buffers[idx], buffer_name)) 
+    else
+      table.insert(content, string.format(" %i - %s", buffers[idx], buffer_name)) 
+    end
   end
   M._log.debug(vim.inspect(content))
 
-  ParentWindow_ID = vim.fn.win_getid()
   Window_ID = popup.create(content, {
     title = "Buffers",
     border = true,
     padding = { 0, 1, 0, 1 },
   })
   Buffer_ID = vim.api.nvim_win_get_buf(Window_ID)
+
+  vim.api.nvim_win_set_cursor(Window_ID, { active_idx, 0 })
 
   vim.api.nvim_buf_set_keymap(Buffer_ID, "n", "q", ":q<CR>", {})
   vim.api.nvim_buf_set_keymap(Buffer_ID, "n", "<ESC>", ":q<CR>", {})
